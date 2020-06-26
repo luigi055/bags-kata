@@ -12,4 +12,22 @@ export default class Durance {
   get extraBags(): Bag[] {
     return this._extraBags;
   }
+
+  private isBackPackFull(): boolean {
+    return this.backpack.isFull();
+  }
+
+  public addItem(item: string) {
+    if (this.isBackPackFull()) {
+      if (!this.extraBags[0]) {
+        const bag = new Bag("Metal");
+        bag.items[0] = item;
+        this.extraBags[0] = bag;
+      } else {
+        this.extraBags[0].items[1] = item;
+      }
+    } else {
+      this.backpack.addItem(item);
+    }
+  }
 }
